@@ -1,0 +1,145 @@
+[
+  {
+    "id": "5d2cd91a9fd02a0017d9fc9b",
+    "date": "Tue Jul 16 2019 07:50:50 GMT+1200 (New Zealand Standard Time)",
+    "sets": [
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" }
+    ],
+    "timeTaken": "1970-01-01T00:10:19.030Z",
+    "__typename": "ExerciseType",
+    "unit": "kg",
+    "x": 0,
+    "y": 1200
+  },
+  {
+    "id": "5d891c0d87e69a0017b627ac",
+    "date": "Tue Sep 24 2019 07:25:01 GMT+1200 (New Zealand Standard Time)",
+    "sets": [
+      { "reps": 2, "value": 120, "exercises": [], "__typename": "SetType" },
+      { "reps": 2, "value": 120, "exercises": [], "__typename": "SetType" },
+      { "reps": 2, "value": 120, "exercises": [], "__typename": "SetType" }
+    ],
+    "timeTaken": "1970-01-01T00:05:33.047Z",
+    "__typename": "ExerciseType",
+    "unit": "kg",
+    "x": 1,
+    "y": 720
+  },
+  {
+    "id": "5dadf9013be2de0017f668c8",
+    "date": "Tue Oct 22 2019 07:29:21 GMT+1300 (New Zealand Daylight Time)",
+    "sets": [
+      { "reps": 2, "value": 120, "exercises": [], "__typename": "SetType" },
+      { "reps": 2, "value": 120, "exercises": [], "__typename": "SetType" },
+      { "reps": 2, "value": 120, "exercises": [], "__typename": "SetType" }
+    ],
+    "timeTaken": "1970-01-01T00:05:09.013Z",
+    "__typename": "ExerciseType",
+    "unit": "kg",
+    "x": 2,
+    "y": 720
+  },
+  {
+    "id": "5db7315e0cf49a00170bb04e",
+    "date": "Tue Oct 29 2019 07:20:14 GMT+1300 (New Zealand Daylight Time)",
+    "sets": [
+      { "reps": 3, "value": 120, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 120, "exercises": [], "__typename": "SetType" }
+    ],
+    "timeTaken": "1970-01-01T00:04:32.015Z",
+    "__typename": "ExerciseType",
+    "unit": "kg",
+    "x": 3,
+    "y": 720
+  },
+  {
+    "id": "5dc06b6533d4c80017a16b08",
+    "date": "Tue Nov 05 2019 07:18:13 GMT+1300 (New Zealand Daylight Time)",
+    "sets": [
+      { "reps": 3, "value": 120, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 120, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 120, "exercises": [], "__typename": "SetType" }
+    ],
+    "timeTaken": "1970-01-01T00:08:05.014Z",
+    "__typename": "ExerciseType",
+    "unit": "kg",
+    "x": 4,
+    "y": 1080
+  },
+  {
+    "id": "5dee91bd449c610017f57e0c",
+    "date": "Tue Dec 10 2019 07:26:05 GMT+1300 (New Zealand Daylight Time)",
+    "sets": [
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" }
+    ],
+    "timeTaken": "1970-01-01T00:07:58.008Z",
+    "__typename": "ExerciseType",
+    "unit": "kg",
+    "x": 5,
+    "y": 900
+  },
+  {
+    "id": "5e0586369907260017e9c604",
+    "date": "Fri Dec 27 2019 17:19:02 GMT+1300 (New Zealand Daylight Time)",
+    "sets": [
+      { "reps": 3, "value": 80, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 80, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 80, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 80, "exercises": [], "__typename": "SetType" }
+    ],
+    "timeTaken": "1970-01-01T00:10:20.044Z",
+    "__typename": "ExerciseType",
+    "unit": "kg",
+    "x": 6,
+    "y": 960
+  },
+  {
+    "id": "5e137b17f96b83001704fe10",
+    "date": "Tue Jan 07 2020 07:23:19 GMT+1300 (New Zealand Daylight Time)",
+    "sets": [
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" }
+    ],
+    "timeTaken": "1970-01-01T00:07:53.063Z",
+    "__typename": "ExerciseType",
+    "unit": "kg",
+    "x": 7,
+    "y": 900
+  },
+  {
+    "id": "5e28937a43833f00171756eb",
+    "date": "Thu Jan 23 2020 07:24:58 GMT+1300 (New Zealand Daylight Time)",
+    "sets": [
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" },
+      { "reps": 3, "value": 100, "exercises": [], "__typename": "SetType" }
+    ],
+    "timeTaken": "1970-01-01T00:09:46.592Z",
+    "__typename": "ExerciseType",
+    "unit": "kg",
+    "x": 8,
+    "y": 1200
+  },
+  {
+    "id": "5e2f2c76e81b270017365f97",
+    "date": "Tue Jan 28 2020 07:31:18 GMT+1300 (New Zealand Daylight Time)",
+    "sets": [
+      { "reps": 4, "value": 80, "exercises": [], "__typename": "SetType" },
+      { "reps": 4, "value": 80, "exercises": [], "__typename": "SetType" },
+      { "reps": 4, "value": 75, "exercises": [], "__typename": "SetType" },
+      { "reps": 4, "value": 70, "exercises": [], "__typename": "SetType" }
+    ],
+    "timeTaken": "1970-01-01T00:14:35.707Z",
+    "__typename": "ExerciseType",
+    "unit": "kg",
+    "x": 9,
+    "y": 1220
+  }
+]

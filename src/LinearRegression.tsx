@@ -6,7 +6,7 @@ import {
   VictoryTheme,
   VictoryLine
 } from "victory";
-import data from "./data.json";
+import data from "./data/shrugs.json";
 import { Scalar, Tensor, Rank, SGDOptimizer } from "@tensorflow/tfjs";
 
 type Props = {
@@ -57,6 +57,7 @@ class LinearRegression extends React.Component<Props, State> {
   }
 
   predict(x: Tensor<Rank.R1>): Tensor<Rank> {
+    // Linear regression formula: y = mx + b
     const prediction = tf.tidy(() => this.m.mul(x).add(this.b));
     this.setState(prevState => ({
       cycles: prevState.cycles + 1
@@ -85,11 +86,12 @@ class LinearRegression extends React.Component<Props, State> {
   }
 
   render() {
-    const xMax = Math.max(...this.xs) + 10;
+    const xMax = Math.max(...this.xs);
+    const xMin = Math.min(...this.xs);
     const line = [
       {
-        x: 0,
-        y: this.b.dataSync()[0]
+        x: xMin,
+        y: xMin * this.m.dataSync()[0] + this.b.dataSync()[0]
       },
       {
         x: xMax,
