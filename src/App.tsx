@@ -23,6 +23,7 @@ class LinearRegression extends React.Component<Props, State> {
   m: Scalar;
   learningRate: number;
   optimizer: SGDOptimizer;
+  interval: number | undefined;
 
   constructor(props: Props) {
     super(props);
@@ -45,7 +46,10 @@ class LinearRegression extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    window.setInterval(() => {
+    this.interval = window.setInterval(() => {
+      if (this.state.cycles > 150) {
+        return window.clearInterval(this.interval);
+      }
       tf.tidy(() => this.train());
     }, 1000);
   }
@@ -62,33 +66,23 @@ class LinearRegression extends React.Component<Props, State> {
   // Labels are the y vals from the data set
   loss(predictions: Tensor<Rank.R1>, labels: Tensor<Rank.R1>): Scalar {
     // Loss function using the square mean error approach
-    return tf.tidy(() =>
-      predictions
-        .sub(labels)
-        .square()
-        .mean()
-    );
+    return predictions
+      .sub(labels)
+      .square()
+      .mean();
   }
 
   train() {
-    // const optimizer = tf.train.sgd(this.learningRate);
-
     this.optimizer.minimize(() => {
-      return tf.tidy(() => {
-        const predsYs = this.predict(tf.tensor1d(this.xs)) as Tensor<Rank.R1>;
-        const tensorYs = tf.tensor1d(this.ys);
-        const stepLoss = this.loss(predsYs, tensorYs);
-        tensorYs.dispose();
-        return stepLoss;
-      });
+      const predsYs = this.predict(tf.tensor1d(this.xs)) as Tensor<Rank.R1>;
+      const tensorYs = tf.tensor1d(this.ys);
+      const stepLoss = this.loss(predsYs, tensorYs);
+      tensorYs.dispose();
+      return stepLoss;
     });
-
-    // console.log(tf.memory());
   }
 
   render() {
-    console.log(this.state.cycles);
-
     const xMax = Math.max(...this.xs) + 10;
     const line = [
       {
@@ -102,13 +96,10 @@ class LinearRegression extends React.Component<Props, State> {
     ];
 
     return (
-      <div>
-        <VictoryChart animate theme={VictoryTheme.material}>
-          <VictoryLine data={line} />
-          <VictoryScatter data={this.data} />
-        </VictoryChart>
-        <button onClick={this.train}>Train the model 1 step</button>
-      </div>
+      <VictoryChart animate theme={VictoryTheme.material}>
+        <VictoryLine data={line} />
+        <VictoryScatter data={this.data} />
+      </VictoryChart>
     );
   }
 }
