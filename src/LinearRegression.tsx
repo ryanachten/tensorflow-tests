@@ -10,15 +10,17 @@ import data from "./data/shrugs.json";
 import { Scalar, Tensor, Rank, SGDOptimizer } from "@tensorflow/tfjs";
 
 type Props = {
+  animate: boolean;
+  data: any[]; //Required<{ x: number; y: number }>[];
+  epochs: number;
   learningRate: number;
 };
 
 type State = {
-  cycles: number;
+  epochs: number;
 };
 
 class LinearRegression extends React.Component<Props, State> {
-  data: { x: number; y: number; id: string }[];
   ys: number[];
   xs: number[];
   b: Scalar;
@@ -29,9 +31,8 @@ class LinearRegression extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.data = data.map(({ id, x, y }) => ({ id, x, y }));
-    this.ys = data.map(({ y }) => y);
-    this.xs = data.map(({ x }) => x);
+    this.ys = this.props.data.map(({ y }) => y);
+    this.xs = this.props.data.map(({ x }) => x);
     // Rate at which the values will be adjusted
     this.learningRate = props.learningRate;
     this.optimizer = tf.train.sgd(this.learningRate);
@@ -43,24 +44,31 @@ class LinearRegression extends React.Component<Props, State> {
     this.m = tf.variable(tf.scalar(Math.random()));
 
     this.state = {
-      cycles: 0
+      epochs: 0
     };
   }
 
   componentDidMount() {
-    this.interval = window.setInterval(() => {
-      if (this.state.cycles > 150) {
-        return window.clearInterval(this.interval);
+    const { animate, epochs } = this.props;
+    if (animate) {
+      this.interval = window.setInterval(() => {
+        if (this.state.epochs > epochs) {
+          return window.clearInterval(this.interval);
+        }
+        tf.tidy(() => this.train());
+      }, 1000);
+    } else {
+      for (let i = 0; i < epochs; i++) {
+        tf.tidy(() => this.train());
       }
-      tf.tidy(() => this.train());
-    }, 1000);
+    }
   }
 
   predict(x: Tensor<Rank.R1>): Tensor<Rank> {
     // Linear regression formula: y = mx + b
     const prediction = tf.tidy(() => this.m.mul(x).add(this.b));
     this.setState(prevState => ({
-      cycles: prevState.cycles + 1
+      epochs: prevState.epochs + 1
     }));
     return prediction;
   }
@@ -102,7 +110,7 @@ class LinearRegression extends React.Component<Props, State> {
     return (
       <VictoryChart animate theme={VictoryTheme.material}>
         <VictoryLine data={line} />
-        <VictoryScatter data={this.data} />
+        <VictoryScatter data={this.props.data} />
       </VictoryChart>
     );
   }

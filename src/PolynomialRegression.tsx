@@ -16,22 +16,34 @@ class PolynomialRegression extends LinearRegression {
     super(props);
     this.a = Math.random();
     this.c = Math.random();
+    this.ys = this.props.data.map(({ y }) => y);
+    this.xs = this.props.data.map(({ x }) => x);
 
     this.state = {
-      cycles: 0
+      epochs: 0
     };
   }
 
   componentDidMount() {
-    this.interval = window.setInterval(() => {
-      if (this.state.cycles > 150) {
-        return window.clearInterval(this.interval);
+    const { animate, epochs } = this.props;
+    if (animate) {
+      this.interval = window.setInterval(() => {
+        if (this.state.epochs > epochs) {
+          return window.clearInterval(this.interval);
+        }
+        tf.tidy(() => this.train());
+        this.setState(prevState => ({
+          epochs: prevState.epochs + 1
+        }));
+      }, 1000);
+    } else {
+      for (let i = 0; i < epochs; i++) {
+        tf.tidy(() => this.train());
       }
-      tf.tidy(() => this.train());
-      this.setState(prevState => ({
-        cycles: prevState.cycles + 1
-      }));
-    }, 1000);
+      this.setState({
+        epochs: epochs
+      });
+    }
   }
 
   predict(x: Tensor<Rank.R1>): Tensor<Rank> {
@@ -69,7 +81,7 @@ class PolynomialRegression extends LinearRegression {
     return (
       <VictoryChart animate theme={VictoryTheme.material}>
         <VictoryLine data={curve} />
-        <VictoryScatter data={this.data} />
+        <VictoryScatter data={this.props.data} />
       </VictoryChart>
     );
   }

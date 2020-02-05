@@ -1,11 +1,24 @@
 import React from "react";
 import LinearRegression from "./LinearRegression";
 import PolynomialRegression from "./PolynomialRegression";
+import json from "./data/bench.json";
+import { randomData, logData } from "./utils";
+const data = logData(18, 1000);
 
 const App = () => (
   <div>
-    <LinearRegression learningRate={0.005} />
-    <PolynomialRegression learningRate={0.005} />
+    <LinearRegression
+      animate={false}
+      data={data}
+      epochs={150}
+      learningRate={0.005}
+    />
+    <PolynomialRegression
+      animate={false}
+      data={data}
+      epochs={150}
+      learningRate={0.005}
+    />
   </div>
 );
 export default App;
