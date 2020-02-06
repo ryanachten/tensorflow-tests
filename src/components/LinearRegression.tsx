@@ -6,7 +6,7 @@ import {
   VictoryTheme,
   VictoryLine
 } from "victory";
-import data from "./data/shrugs.json";
+import data from "../data/shrugs.json";
 import { Scalar, Tensor, Rank, SGDOptimizer } from "@tensorflow/tfjs";
 
 type Props = {

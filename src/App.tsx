@@ -1,6 +1,6 @@
 import React from "react";
-import LinearRegression from "./LinearRegression";
-import PolynomialRegression from "./PolynomialRegression";
+import LinearRegression from "./components/LinearRegression";
+import PolynomialRegression from "./components/PolynomialRegression";
 import json from "./data/bench.json";
 import { randomData, logData } from "./utils";
 const data = logData(18, 1000);

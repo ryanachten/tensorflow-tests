@@ -10,8 +10,8 @@ import { Tensor, Rank } from "@tensorflow/tfjs";
 import LinearRegression from "./LinearRegression";
 
 class PolynomialRegression extends LinearRegression {
-  a: number;
-  c: number;
+  a: number; // TODO: should be a scalar varaible
+  c: number; // TODO: should be a scalar varaible
   constructor(props: any) {
     super(props);
     this.a = Math.random();
