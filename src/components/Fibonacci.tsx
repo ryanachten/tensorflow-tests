@@ -5,7 +5,8 @@ import {
   SGDOptimizer,
   Tensor,
   Tensor1D,
-  Rank
+  Rank,
+  Scalar
 } from "@tensorflow/tfjs";
 import { Layer } from "@tensorflow/tfjs-layers/dist/engine/topology";
 
@@ -14,36 +15,19 @@ type Props = {};
 type State = {};
 
 class Fibonacci extends React.Component<Props, State> {
-  hidden?: Layer;
-  learningRate?: number;
-  model?: Sequential;
-  optimiser?: SGDOptimizer;
-  output?: Layer;
+  a: Scalar;
+  b: Scalar;
 
   constructor(props: Props) {
     super(props);
+    // Building our model
+    this.a = tf.variable(tf.scalar(Math.random()));
+    this.b = tf.variable(tf.scalar(Math.random()));
     this.initModel();
   }
 
   async initModel() {
-    function fibonacci(num: number) {
-      var a = 1,
-        b = 0,
-        temp;
-      var seq = [];
-
-      while (num > 0) {
-        temp = a;
-        a = a + b;
-        b = temp;
-        seq.push(b);
-        num--;
-      }
-
-      return seq;
-    }
-
-    const fibs = fibonacci(100);
+    const fibs = this.fibonacci(100);
 
     const xs = tf.tensor1d(fibs.slice(0, fibs.length - 1));
     const ys = tf.tensor1d(fibs.slice(1));
@@ -59,30 +43,10 @@ class Fibonacci extends React.Component<Props, State> {
     const xsNorm = norm(xs);
     const ysNorm = norm(ys);
 
-    // Building our model
-    const a = tf.variable(tf.scalar(Math.random()));
-    const b = tf.variable(tf.scalar(Math.random()));
-
-    a.print();
-    b.print();
-
-    function predict(x: Tensor<Rank>): Tensor<Rank.R0> {
-      return tf.tidy(() => {
-        return a.mul(x).add(b);
-      });
-    }
+    this.a.print();
+    this.b.print();
 
     // Training
-
-    function loss(
-      predictions: Tensor<Rank>,
-      labels: Tensor<Rank>
-    ): Tensor<Rank.R0> {
-      return predictions
-        .sub(labels)
-        .square()
-        .mean();
-    }
 
     const learningRate = 0.5;
     const optimizer = tf.train.sgd(learningRate);
@@ -92,8 +56,8 @@ class Fibonacci extends React.Component<Props, State> {
 
     for (let iter = 0; iter < numIterations; iter++) {
       optimizer.minimize(() => {
-        const predsYs = predict(xsNorm);
-        const e = loss(predsYs, ysNorm);
+        const predsYs = this.predict(xsNorm);
+        const e = this.loss(predsYs, ysNorm);
         errors.push(e.dataSync());
         return e;
       });
@@ -105,10 +69,23 @@ class Fibonacci extends React.Component<Props, State> {
     console.log(errors[numIterations - 1]);
 
     const xTest = tf.tensor1d([2, 354224848179262000000]);
-    predict(xTest).print();
+    this.predict(xTest).print();
 
-    a.print();
-    b.print();
+    this.a.print();
+    this.b.print();
+  }
+
+  loss(predictions: Tensor<Rank>, labels: Tensor<Rank>): Tensor<Rank.R0> {
+    return predictions
+      .sub(labels)
+      .square()
+      .mean();
+  }
+
+  predict(x: Tensor<Rank>): Tensor<Rank.R0> {
+    return tf.tidy(() => {
+      return this.a.mul(x).add(this.b);
+    });
   }
 
   fibonacci(range: number) {
@@ -126,12 +103,12 @@ class Fibonacci extends React.Component<Props, State> {
     return seq;
   }
 
-  normalise(n: Tensor<tf.Rank.R1>) {
-    const nMin = n.min();
-    const nMax = n.max();
-    const nRange = nMax.sub(nMin);
-    return n.sub(nMin).div(nRange);
-  }
+  // normalise(n: Tensor<tf.Rank.R1>) {
+  //   const nMin = n.min();
+  //   const nMax = n.max();
+  //   const nRange = nMax.sub(nMin);
+  //   return n.sub(nMin).div(nRange);
+  // }
 
   render() {
     return <div>Fibonacci</div>;
