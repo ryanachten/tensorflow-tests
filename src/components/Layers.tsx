@@ -1,6 +1,6 @@
 import React from "react";
 import * as tf from "@tensorflow/tfjs";
-import { Sequential } from "@tensorflow/tfjs";
+import { Sequential, SGDOptimizer } from "@tensorflow/tfjs";
 import { Layer } from "@tensorflow/tfjs-layers/dist/engine/topology";
 
 type Props = {};
@@ -9,7 +9,9 @@ type State = {};
 
 class LayersTest extends React.Component<Props, State> {
   hidden: Layer;
+  learningRate: number;
   model: Sequential;
+  optimiser: SGDOptimizer;
   output: Layer;
 
   constructor(props: Props) {
@@ -32,6 +34,14 @@ class LayersTest extends React.Component<Props, State> {
     // Add the layers to the sequential model
     this.model.add(this.hidden);
     this.model.add(this.output);
+
+    this.learningRate = 0.1;
+    this.optimiser = tf.train.sgd(this.learningRate);
+
+    this.model.compile({
+      optimizer: this.optimiser,
+      loss: tf.losses.meanSquaredError
+    });
   }
 
   render() {
