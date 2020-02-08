@@ -4,11 +4,12 @@ import PolynomialRegression from "./components/PolynomialRegression";
 import json from "./data/bench.json";
 import { randomData, logData } from "./utils";
 import LayersTest from "./components/Layers";
+import Fibonacci from "./components/Fibonacci";
 const data = logData(18, 1000);
 
 const App = () => (
   <div>
-    <LayersTest />
+    <Fibonacci />
     {/* <LinearRegression
       animate={false}
       data={data}
