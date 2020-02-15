@@ -4,11 +4,13 @@ import PolynomialRegression from "./components/PolynomialRegression";
 import json from "./data/bench.json";
 import { randomData, logData } from "./utils";
 import MilesPerGallon from "./components/MilesPerGallon";
+import SequentialTest from "./components/SequentialTest";
 const data = logData(18, 1000);
 
 const App = () => (
   <div>
-    <MilesPerGallon />
+    <SequentialTest />
+    {/* <MilesPerGallon /> */}
     {/* <LinearRegression
       animate={false}
       data={data}
