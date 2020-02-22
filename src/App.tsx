@@ -1,28 +1,12 @@
 import React from "react";
-import LinearRegression from "./components/LinearRegression";
-import PolynomialRegression from "./components/PolynomialRegression";
 import json from "./data/bench.json";
 import { randomData, logData } from "./utils";
-import MilesPerGallon from "./components/MilesPerGallon";
-import SequentialTest from "./components/SequentialTest";
+import DigitRecogniser from "./components/DigitRecogniser";
 const data = logData(18, 1000);
 
 const App = () => (
   <div>
-    <SequentialTest />
-    {/* <MilesPerGallon /> */}
-    {/* <LinearRegression
-      animate={false}
-      data={data}
-      epochs={150}
-      learningRate={0.005}
-    />
-    <PolynomialRegression
-      animate={false}
-      data={data}
-      epochs={150}
-      learningRate={0.005}
-    /> */}
+    <DigitRecogniser />
   </div>
 );
 export default App;
